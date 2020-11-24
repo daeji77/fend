@@ -91,6 +91,19 @@ navbar.addEventListener('click', function(event) {
    const section = document.querySelector(`#${id}`);
    scrollToElem(section);
    setActiveSection(section);
-})
+});
 
 // Add class 'active' to section when near top of viewport
+document.addEventListener('scroll', function(event) {
+    const pageHeaderBottom = document.querySelector('.page__header');
+    const sections = document.querySelectorAll('section');
+    for (section of sections) {
+        const topPos = section.getBoundingClientRect().top -
+            pageHeaderBottom.getBoundingClientRect().bottom;
+        console.log(`${section.id}: ${section.getBoundingClientRect().top}, ${topPos}`);
+        if (topPos >=0 && topPos < 100) {
+            setActiveSection(section);
+            break;
+        }
+    }
+});
