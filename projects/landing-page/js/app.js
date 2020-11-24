@@ -34,7 +34,16 @@
 */
 
 // build the nav
-
+const fragement = new DocumentFragment();
+const sections = document.querySelectorAll('section');
+for (section of sections) {
+    const li = document.createElement('li');
+    li.textContent = section.getAttribute('data-nav')
+    // console.log(section.getAttribute('data-nav'));
+    fragement.appendChild(li);
+}
+const navbar = document.querySelector('#navbar__list');
+navbar.appendChild(fragement);
 
 // Add class 'active' to section when near top of viewport
 
