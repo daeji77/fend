@@ -38,6 +38,7 @@ const fragement = new DocumentFragment();
 const sections = document.querySelectorAll('section');
 for (section of sections) {
     const li = document.createElement('li');
+    li.classList.add('menu__link');
     li.textContent = section.getAttribute('data-nav')
     // console.log(section.getAttribute('data-nav'));
     fragement.appendChild(li);

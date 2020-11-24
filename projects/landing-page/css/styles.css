@@ -73,11 +73,6 @@ section {
 .navbar__menu li {
     display: inline-block;
     color: blue;
-    padding-left: 1em;
-    padding-right: 1em;
-    padding-top: 0.5em;
-    padding-bottom: 0.5em;
-    border: 2px red solid;
 }
 
 .navbar__menu .menu__link {
