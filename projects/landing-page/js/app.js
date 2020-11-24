@@ -55,11 +55,16 @@ function buildNav() {
     navbar.appendChild(fragement);
 }
 
-// Add class 'active' to section when near top of viewport
-
+function setActiveSection(activeElem) {
+    const sections = document.querySelectorAll('section');
+    for (section of sections) {
+        section.classList.remove('your-active-class');
+    }
+    activeElem.classList.add('your-active-class');
+}
 
 // Scroll to anchor ID using scrollTO event
-function scrollToElem(elem) { 
+function scrollToElem(elem) {
     const pageHeaderBottom = document.querySelector('.page__header');
     const topPos = elem.getBoundingClientRect().top + window.pageYOffset -
         pageHeaderBottom.getBoundingClientRect().bottom
@@ -85,6 +90,7 @@ navbar.addEventListener('click', function(event) {
    const id = event.target.getAttribute('data-nav-id');
    const section = document.querySelector(`#${id}`);
    scrollToElem(section);
+   setActiveSection(section);
 })
 
-// Set sections as active
+// Add class 'active' to section when near top of viewport
