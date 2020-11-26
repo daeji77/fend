@@ -43,12 +43,6 @@ function buildNav() {
         li.textContent = section.getAttribute('data-nav');
         li.setAttribute('data-nav-id', section.id);
 
-        // const a = document.createElement('A');
-        // a.textContent = section.getAttribute('data-nav');
-        // console.log(`#${section.id}`);
-        // a.href = `#${section.id}`;
-        // li.appendChild(a);
-
         fragement.appendChild(li);
     }
     const navbar = document.querySelector('#navbar__list');
@@ -66,6 +60,10 @@ function setActiveSection(activeElem) {
 // Scroll to anchor ID using scrollTO event
 function scrollToElem(elem) {
     const pageHeaderBottom = document.querySelector('.page__header');
+    // Note: This alternative only works when elem is the top elements of the
+    //   document.
+    // const topPos = elem.offsetTop -
+    //     pageHeaderBottom.getBoundingClientRect().bottom
     const topPos = elem.getBoundingClientRect().top + window.pageYOffset -
         pageHeaderBottom.getBoundingClientRect().bottom
 
@@ -100,7 +98,7 @@ document.addEventListener('scroll', function(event) {
     for (section of sections) {
         const topPos = section.getBoundingClientRect().top -
             pageHeaderBottom.getBoundingClientRect().bottom;
-        console.log(`${section.id}: ${section.getBoundingClientRect().top}, ${topPos}`);
+        // console.log(`${section.id}: ${section.getBoundingClientRect().top}, ${topPos}`);
         if (topPos >=0 && topPos < 100) {
             setActiveSection(section);
             break;
