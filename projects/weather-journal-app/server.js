@@ -25,3 +25,12 @@ const port = 3000
 const server = app.listen(port, () => {
     console.log(`running on localhost: ${port}`);
 });
+
+app.get('/all', function(req, res) {
+    res.send(projectData['weather']);
+});
+
+app.post('/postData', function(req, res) {
+    console.log('postData input', req.body);
+    projectData['weather'] = req.body;
+});
