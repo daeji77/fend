@@ -31,6 +31,6 @@ app.get('/all', function(req, res) {
 });
 
 app.post('/postData', function(req, res) {
-    console.log('postData input', req.body);
     projectData['weather'] = req.body;
+    res.send(projectData['weather']);
 });
