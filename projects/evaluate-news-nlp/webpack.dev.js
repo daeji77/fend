@@ -5,9 +5,23 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 
 module.exports = {
     entry: './src/client/index.js',
+    output: {
+      libraryTarget: 'var',
+      library: 'Client'
+    },
     mode: 'development',
     devtool: 'source-map',
     stats: 'verbose',
+    devServer: {
+      // historyApiFallback: true,
+      hot: false,
+      inline: false,
+
+      port: 3000,
+      proxy: {
+        '/api': 'http://localhost:8080'
+      }
+    },
     module: {
         rules: [
             {
