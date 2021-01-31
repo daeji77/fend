@@ -13,14 +13,16 @@ module.exports = {
     devtool: 'source-map',
     stats: 'verbose',
     devServer: {
-      // historyApiFallback: true,
       hot: false,
       inline: false,
 
       port: 3000,
       proxy: {
         '/api': 'http://localhost:8080'
-      }
+      },
+      allowedHosts: [
+        'api.meaningcloud.com',
+      ]
     },
     module: {
         rules: [
