@@ -1,6 +1,7 @@
 var path = require('path')
 const express = require('express')
 const mockAPIResponse = require('./mockAPI.js')
+const fetch = require('node-fetch')
 const dotenv = require('dotenv');
 dotenv.config();
 
@@ -18,8 +19,25 @@ app.get('/', function (req, res) {
     // res.sendFile(path.resolve('src/client/views/index.html'))
 })
 
-app.get('/api/get_key', function (req, res) {
-    res.send({key: application_key});
+app.get('/api/query_sentiment', async function(req, res) {
+    console.log("::: /api/query_sentiment :::");
+
+    const url = 'https://api.meaningcloud.com/sentiment-2.1?' +
+        `key=${application_key}&of=json&txt=${req.query.text}&lang=en`;
+    console.log(url);
+
+    const sentiment = await fetch(url, {
+      method: 'post',
+    })
+    .then(res => res.json())
+    .then(function(res) {
+        console.log(res);
+        return res.subjectivity;
+    })
+
+    console.log(`sentiment: ${sentiment}`)
+
+    res.send({sentiment: sentiment});
 })
 
 // designates what port the app will listen to for incoming requests

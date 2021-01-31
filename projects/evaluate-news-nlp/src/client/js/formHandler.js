@@ -1,10 +1,3 @@
-async function get_api_key() {
-  console.log('calling');
-  const res = await fetch('/api/get_key');
-  const data = await res.json();
-  return data.key;
-};
-
 async function handleSubmit(event) {
     event.preventDefault()
 
@@ -12,23 +5,14 @@ async function handleSubmit(event) {
     const formText = document.getElementById('name').value
     Client.checkForName(formText)
 
-    const key = await get_api_key();
-
-    console.log("::: Form Submitted :::");
-
     const formTextEncoded = encodeURIComponent(formText.trim());
-    const url = 'https://api.meaningcloud.com/sentiment-2.1?' +
-        `key=${key}&of=json&txt=${formTextEncoded}&lang=en`;
-    console.log(url);
+    const res =
+        await fetch(`/api/query_sentiment?text=${formTextEncoded}`);
+    const data = await res.json();
 
-    fetch(url, {
-      method: 'post',
-    })
-    .then(res => res.json())
-    .then(function(res) {
-        console.log(res);
-        document.getElementById('results').innerHTML = res.subjectivity;
-    })
+    console.log(data);
+
+    document.getElementById('results').innerHTML = data.sentiment;
 }
 
 function onBlur() {
